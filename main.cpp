@@ -8,7 +8,8 @@ struct Node{
     Node(char input);
   int frequency;
   char character;
-  Node* next;
+  Node* right;
+  Node* left;
 };
 
 struct LinkedList{
@@ -19,6 +20,22 @@ struct LinkedList{
   void insert(char alpha);
   void printf();
   //void delete;
+};
+
+struct tree{
+    tree();
+    //void insert(char alpha and maybe int frequency);
+    //~tree();
+    Node* root = NULL;
+};
+
+struct stack{
+    //stack();
+    //void getTop();
+    //Node* top = Null;
+    //Node* end = Null;
+    //void pop();
+    //void push();
 };
 
 int main()
@@ -59,15 +76,15 @@ void LinkedList::insert(char alpha){
                 return;
             }
             
-            else if(hold->next){
-            hold = hold->next;
+            else if(hold->right){
+            hold = hold->right;
             }
             else{
                 break;
             }
         }
             Node* inserter = new Node(alpha);
-            hold->next=inserter;
+            hold->right=inserter;
     }
 }
     
@@ -76,16 +93,22 @@ void LinkedList::printf(){
     printer=head;
     while(printer){
         cout<<printer->character<<" "<<printer->frequency<<endl;
-        printer=printer->next;
+        printer=printer->right;
     }
 }
 
 Node::Node(){
     character=NULL;
     frequency=0;
-    next=NULL;
+    right=NULL;
+    left=NULL;
 }
 Node::Node(char input){
     character=input;
     frequency=1;
+}
+
+tree::tree(){
+    root->character=NULL;
+    root->frequency=0;
 }
