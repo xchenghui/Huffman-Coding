@@ -1,8 +1,18 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
 
 #include <iostream>
 
 using namespace std;
+
 struct Node{
+    Node();
+    Node(char input);
   int frequency;
   char character;
   Node* next;
@@ -30,6 +40,7 @@ LinkedList::LinkedList(){
     head->character=NULL;
     head->frequency=0;
 }
+
 LinkedList::LinkedList(string str){
     char store;
     for(int i=0; i<str.length(); i++){
@@ -37,11 +48,10 @@ LinkedList::LinkedList(string str){
         insert(store);
     }
 }
-void LinkedList:: insert(char alpha){
+
+void LinkedList::insert(char alpha){
     if(!head){
-        head = new Node();
-        head->character = alpha;
-        head->frequency = 1;
+        head = new Node(alpha);
     }
     
     else if (head->character == alpha) {
@@ -52,26 +62,35 @@ void LinkedList:: insert(char alpha){
         Node* hold = head;
         while(hold){
             if(hold->character==alpha){
-                hold->frequency=head->frequency+1;
+                hold->frequency=hold->frequency+1;
                 return;
             }
             
             else if(hold->next){
             hold = hold->next;
-        }
-        
-            Node* inserter= new Node();
-            hold->next=inserter;
-            inserter->character = alpha;
-            inserter->frequency = 1;
             }
+        
+            Node* inserter = new Node(alpha);
+            hold->next=inserter;
         }
     }
+}
+    
 void LinkedList::printf(){
     Node* printer;
     printer=head;
-    while(printer){
+    while(printer->next){
         cout<<printer->character<<" "<<printer->frequency<<endl;
         printer=printer->next;
     }
+}
+
+Node::Node(){
+    character=NULL;
+    frequency=0;
+    next=NULL;
+}
+Node::Node(char input){
+    character=input;
+    frequency=1;
 }
