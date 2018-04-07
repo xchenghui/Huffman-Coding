@@ -1,10 +1,3 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 
 #include <iostream>
 
@@ -61,7 +54,7 @@ void LinkedList::insert(char alpha){
     else {
         Node* hold = head;
         while(hold){
-            if(hold->character==alpha){
+            if(alpha==hold->character){
                 hold->frequency=hold->frequency+1;
                 return;
             }
@@ -69,17 +62,19 @@ void LinkedList::insert(char alpha){
             else if(hold->next){
             hold = hold->next;
             }
-        
+            else{
+                break;
+            }
+        }
             Node* inserter = new Node(alpha);
             hold->next=inserter;
-        }
     }
 }
     
 void LinkedList::printf(){
     Node* printer;
     printer=head;
-    while(printer->next){
+    while(printer){
         cout<<printer->character<<" "<<printer->frequency<<endl;
         printer=printer->next;
     }
