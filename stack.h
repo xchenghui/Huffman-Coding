@@ -1,4 +1,4 @@
-
+ 
 #ifndef STACK_H_
 #define STACK_H_
 
@@ -16,10 +16,10 @@ public:
     stack();
     ~stack();
     snode* pop();
-    void push(char character);
-    void push(snode* input);
+    void push(char character);  //read from character, puched onto the stack.
+    void push(snode* input);    //pushing the node into the stack.
     void sort();
-
+    void remove();
 
 };
 #endif /* STACK_H_ */
