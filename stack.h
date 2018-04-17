@@ -16,6 +16,7 @@ public:
     stack();
     ~stack();
     snode* pop();
+    void duplicate();
     void push(char character);  //read from character, puched onto the stack.
     void push(snode* input);    //pushing the node into the stack.
     void sort();
