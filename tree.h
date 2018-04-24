@@ -17,6 +17,8 @@ public:
 
     void print();
     void build(stack *list);
+
+    void printde();
     tnode* find_char(char alpha);
 
     //data members
