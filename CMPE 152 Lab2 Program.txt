@@ -1,0 +1,172 @@
+﻿#include <stdio.h>
+char input[50];
+int hold=0;
+char word;
+char letter[50];
+struct Node {
+        char words[51];
+        struct Node* leftChild;
+        struct Node* rightChild;
+        struct Node* parent;
+}
+        *root = NULL, *temp = NULL;
+        
+int count=50;
+int main(){ /* Goal?Expr */
+   printf("Please input an acceptable math operation:\n");
+   scanf("%s", input);
+   printf("\n");
+        root = (struct Node *) malloc(1*sizeof(struct Node));
+        
+   for(int i=0;i<50;i++){ //Create string and copy to root
+           letter[i]=input[i];
+//        strncpy(letter, input, i);
+   }
+          printf(letter);
+   word = letter[hold];                                                 //Begin setting root token as "Expr".
+   root->words[0]='G';
+   //G=Goal
+   temp=root;                                                           //Begin Construct Abstract Syntax Tree
+   temp->leftChild = (struct Node *) malloc(1*sizeof(struct Node));
+   temp->words[0]='E';
+   temp=temp->leftChild;
+   Expr(temp);
+  
+  root->leftChild=temp;
+/*   struct Node *printing= (struct Node *) malloc(1*sizeof(struct Node));
+   printing->leftChild=root;*/
+        print(root,50);
+}
+void Expr(struct Node *tempe) {/* Expr?Term Expr0 */
+            tempe->rightChild = (struct Node *) malloc(1*sizeof(struct Node));
+            tempe->leftChild = (struct Node *) malloc(1*sizeof(struct Node));
+           
+        Term(tempe->leftChild);
+        EPrime(tempe->rightChild);
+        return;
+}
+void EPrime(struct Node *tempe) {/* Expr0?+ Term Expr0 */ /* Expr0?- Term Expr0 */
+            tempe->rightChild = (struct Node *) malloc(1*sizeof(struct Node));
+            tempe->leftChild = (struct Node *) malloc(1*sizeof(struct Node));
+            
+   if ((word == '+') || (word == '-')) {
+           tempe->words[0] = word; //+ or -
+           word = letter[hold++];
+           
+           Term(tempe->leftChild);
+           EPrime(tempe->rightChild);
+           
+   }
+   else if ((word == ')') || (word == '\0')) {/* Expr0? */
+           if(word== '\0') {                            //& = empty
+               tempe->words[0] = '&';
+               tempe->rightChild->words[0]='$';
+           }
+           else if(word == ')') { tempe->words[0] = ')';
+           word= letter[hold++];
+           }}
+        else {
+            tempe->words[0]= '&';
+        }
+        return;
+}
+void Term(struct Node *tempe) {/* Term?Factor Term0 */
+            
+            tempe->leftChild = (struct Node *) malloc(1*sizeof(struct Node));
+            
+            
+            Factor(tempe->leftChild);
+            TPrime(tempe);
+        return;
+}
+void TPrime(struct Node *tempe) {/* Term0?x Factor Term0 */ /* Term0?÷ Factor Term0 */
+            tempe->rightChild = (struct Node *) malloc(1*sizeof(struct Node));
+            tempe->words[0] = 'T';
+           tempe->words[1] = '`';
+            
+   if ((word == 'x') ||(word == '*')||(word == '÷')||(word == '/')) {
+           tempe->rightChild->words[0]=word; //x|* or ÷|/
+           //begin;
+           word = letter[hold++];
+           tempe->rightChild->leftChild = (struct Node *) malloc(1*sizeof(struct Node));
+           tempe->rightChild->rightChild = (struct Node *) malloc(1*sizeof(struct Node));
+           Factor(tempe->rightChild->leftChild);
+           TPrime(tempe->rightChild->rightChild);
+           
+   }
+   else if (/*(word == '+') || (word == '-') ||*/ (word == ')') || (word == '\0')) /* Term0? */ {
+               if(word=='\0'){
+                   tempe->rightChild->words[0] = '&';
+                    tempe->rightChild->rightChild = (struct Node *) malloc(1*sizeof(struct Node));
+                   tempe->rightChild->rightChild->words[0] = '$';
+               }
+               else if(word==')') {
+                   tempe->rightChild->words[0] = ')';
+                   word=letter[hold++];
+               }
+   }
+   else{tempe->rightChild->words[0]='&';}
+        return;
+}
+void Factor(struct Node *tempe) {/* Factor?( Expr ) */
+            tempe->rightChild = (struct Node *) malloc(1*sizeof(struct Node));
+            
+   if (word == '(' ) {
+           tempe->words[0]= '(';
+           //begin;
+           word = letter[hold++];
+           if (word != ')' ) {
+               //word = letter[hold++];
+               Expr(tempe->rightChild);
+               /*word = letter[hold++];*/}}
+           /* Factor?num */
+           /* Factor?name */
+   else if ((word >='0' && word <= '9') || (word >= 'A' && word <= 'z')) {
+           //begin
+           int i=0;
+           while((word >='0' && word <= '9') || (word >= 'A' && word <= 'z')){
+           if(!((word >='0' && word <= '9') || (word >= 'A' && word <= 'z'))){break;}
+            tempe->rightChild->words[i]=word;
+            word = letter[hold++];
+            i++;
+           }
+   }
+            return;
+}
+void printspaces(int number){
+        for(int i=0;i<number;i++){
+            printf(" ");
+        }
+}
+void callPrint(){
+        printspaces((count));
+        printf(root->words);
+        printf("\n");
+        int space = count-(1*2);
+        print(root,space);
+        //space = (count+1)*2;
+        //print(root,space);
+}
+void print(struct Node *tempe, int spaces){
+  /*while(tempe->parent){
+          tempe=tempe->parent;
+  }*/
+   if(tempe->leftChild != NULL){
+            printspaces(spaces-1);
+            printf(tempe->leftChild->words);
+                printf("\n");
+            print(tempe->leftChild,spaces-(1*2));
+        }
+        /*if(tempe->middleChild != NULL) {
+            printspaces(spaces);
+            printf("%c\n",tempe->middleChild->key);
+            print(tempe->middleChild,spaces);
+        }*/
+        if(tempe->rightChild != NULL) {
+            printspaces(spaces+1);
+            printf(tempe->rightChild->words);
+                printf("\n");
+            print(tempe->rightChild,spaces+(1*2));
+        }
+//        printf("__\n");
+}
