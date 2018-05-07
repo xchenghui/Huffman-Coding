@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void visit(tnode *node);
+void visit(tnode *node, list123 w);
 tnode* find(tnode *node,char alpha);
 
 
@@ -34,85 +34,118 @@ void tree::build(stack *list){
     root=list->head->root;
 }
 
-void visit(tnode *node){
-   //cout<<node->character<<endl;
-    if(node->left==NULL&&node->right==NULL){
-        cout<<node->character<<" "<<node->frequency<<" ";
-        node->output(cout);
-        cout<<endl;
+
+/*void key(tnode *node, list writer)
+{
+	if (node->left == NULL && node->right ==NULL)
+    {
+        writer.writeBit('1');
+        writer.writeBit(node->character);
     }
-    else{
-        visit(node->left);
-        visit(node->right);
+    else
+    {
+        writer.writeBit('0');
+        key(node->left, writer);
+        key(node->right, writer);
     }
 }
-
-
+*/
 void tree::printde()
 {
-    ofstream origin;
-    ifstream in3;
-    origin.open("orginal_file.txt");
+	ofstream origin;
+	ifstream in3;
+	origin.open("string.txt");
     in3.open("output.txt");
     if(in3.is_open()&&origin.is_open())
-    {
-        string line;
-        string bin;
-        string temp= "";
+	{
+	    string line;
+	    string bin;
+	    string temp= "";
     while(getline(in3,line))
     {
-    istringstream s(line);
-    s>>bin; 
-    }
-    //cout<<bin;
-    tnode *node = root;             // set initial travel node pointer is root.
-    
-    for(int i =0; i<= bin.size();i++)
-    {
-    if(bin[i]== '0')            // when string is 0, go left.
-    {  
-        node = node->left;
-     }
-     else
-     {
-        node = node->right;        // else, go right.
-     }
-     if(node->left == NULL && node->right== NULL)
-     {
-        temp = temp + node->character;
-        cout<<node->character;         // print orginal file.
-        origin << node->character;
-        node = root;
-     
-    }
-    in3.close();
-    
+	istringstream s(line);
+	s>>bin; 
+	}
+	//cout<<bin;
+	tnode *node = root;             // set initial travel node pointer is root.
+	
+ 	for(int i =0; i<= bin.size();i++)
+ 	{
+ 	if(bin[i]== '0')            // when string is 0, go left.
+ 	{  
+ 		node = node->left;
+	 }
+	 else
+	 {
+	 	node = node->right;        // else, go right.
+	 }
+	 if(node->left == NULL && node->right== NULL)
+	 {
+	 	temp = temp + node->character;
+	 	cout<<node->character;         // print orginal file.
+	 	origin << node->character;
+	 	node = root;
+	 
+	}
+	in3.close();
+	
  }
  origin.close();
 }
 }
- //cout<<node1->character<<" "<<node1->character<<endl;
- 
-    //cout<<temp;
- 
- 
-    //cout<<bin<<endl;
-    //cout<<bin.size();     
-    
-    //return temp;
-    
-    
 
+void tree::visit(tnode *node, list123 *key){                  // store data to a simple linked list
 
+    if(node->left==NULL&&node->right==NULL){
+        //cout<<node->character<<" ";//" "<<node->frequency<<" ";
+        //node->output(cout);
+        //cout<<endl;
+        key->writeBit('1');                       
+        key->writeBit(node->character);
+        //key.display();
 
+    }
+    else{
+    	key->writeBit('0');
+        visit(node->left, key);
+        visit(node->right , key);
+    }
+    //key.display();
+}
+void tree::visit1(tnode *node)
+{ //list123 key){                  // store data to a simple linked list
+
+    if(node->left==NULL&&node->right==NULL){
+        cout<<node->character<<" ";//" "<<node->frequency<<" ";
+        node->output(cout);
+        cout<<endl;
+        //key.writeBit('1');                       
+        //key.writeBit(node->character);
+
+    }
+    else{
+    	//key.writeBit('0');
+        visit1(node->left);
+        visit1(node->right);
+    }
+    //key.display();
+}
 void tree::print(){
 
-    //cout<<root->character<<" "<<root->frequency<<" ";
-    //root->output(cout);
-    visit(root);
+	//cout<<root->character<<" "<<root->frequency<<" ";
+	//root->output(cout);
+	visit1(root);
+	
 }
 
-
+void tree::set()
+{
+	list123 w;
+	list123 *x = &w;
+    visit(root,x);
+    w.display();
+    
+}
 
 tnode* tree::find_char(char alpha){
     return find(root,alpha);
@@ -127,3 +160,5 @@ tnode* find(tnode *node,char alpha){
     if(Right) return Right;
     return NULL;
 }
+
+

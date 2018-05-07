@@ -3,7 +3,7 @@
 using namespace std;
 
 stack::stack() {
-    head=nullptr;
+    head=NULL;
     size=0;
 
 }
@@ -51,10 +51,10 @@ void stack::duplicate(){
 }
 
 void stack::push(snode *input){
-    if(head==nullptr) head=input;
+    if(head==NULL) head=input;
     else{
         snode *go=head;
-        snode *old=nullptr;
+        snode *old=NULL;
         while(go){
             if(go->frequency>=input->frequency){
                 break;
@@ -64,7 +64,7 @@ void stack::push(snode *input){
 
         }
         input->next=go;
-        if(old==nullptr) head=input;
+        if(old==NULL) head=input;
         else old->next=input;
     }
     size++;

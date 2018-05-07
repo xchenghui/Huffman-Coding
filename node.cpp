@@ -4,17 +4,17 @@
 
 
 snode::snode() {
-    next=nullptr;
-    root=nullptr;
+    next= NULL;
+    root=NULL;
     character='\0';
     frequency=0;
 }
 
 snode::snode(char input) {
-    root=nullptr;
+    root=NULL;
     character = input;
     frequency=1;
-    next=nullptr;
+    next=NULL;
 }
 
 snode::~snode() {
@@ -23,10 +23,10 @@ snode::~snode() {
 
 tnode::tnode(){
     character='\0';
-    parent=nullptr;
+    parent=NULL;
     frequency=0;
-    right=nullptr;
-    left=nullptr;
+    right=NULL;
+    left=NULL;
 }
 
 tnode::~tnode(){
@@ -36,7 +36,7 @@ tnode::~tnode(){
 struct node{
     node(int x){
         data=x;
-        next=nullptr;
+        next=NULL;
     }
     int data;
     node* next;
@@ -45,7 +45,7 @@ struct node{
 struct out_storage{
     node* head;
     out_storage(){
-        head= nullptr;
+        head= NULL;
     }
     void push(int x){
         if(!head)head=new node(x);

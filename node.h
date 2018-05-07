@@ -10,7 +10,7 @@ public:
 	tnode();
 	~tnode();
 	void output(ostream& out);
-
+	
 	tnode* left;
 	tnode* right;
 	tnode* parent;
