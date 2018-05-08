@@ -19,12 +19,8 @@ void compress(istream &in,istream &in2,ostream &out){
     list->duplicate();
     tree data;
     data.build(list);
-    //data.printde();
     data.print();
-    //data.keyP();
-    //w.display();
     
-    //ofstream 
     char alpha;
     tnode* temp;
     while(in2.get(alpha)){
@@ -33,17 +29,8 @@ void compress(istream &in,istream &in2,ostream &out){
         else cout<<"error"<<endl;
     }
     data.set();
-    
 }
-/*void decode(istream &in, istream &in2)          // have to build tree to get root.
-{
-	stack *list=read(in);
-    list->sort();
-    list->duplicate();
-    tree data;
-    data.build(list);
-    data.printde();
-}*/
+
 void recur(ifstream &key, tnode *node1)
 {
 	char x;
@@ -97,33 +84,39 @@ void decode(ifstream &key)
 	key.get(x);
 	recur(key, deco.root);
 	deco.print();
+	cout<<endl<<"Text result:"<<endl;
 	deco.printde();
-	
+	cout<<endl;
 }
 
 
 int main(){
 	
-	//tree test1;
-    ifstream in;
-    in.open("test.txt");
-    ifstream in2;
-    in2.open("test.txt");
-    ofstream out;
-    out.open("output.txt");
-    compress(in,in2,out);
-    in.close();
-    in2.close();
-    out.close();
-    in.open("key.txt");
-   
-    decode(in);
-    in.close();
-   
-    
-    system("pause");
-   
-    
+	int state=0;
+	while(state!=3){
+		cout<<endl<<"1. Encode"<<endl<<"2. Decode"<<endl<<"3. Exit"<<endl;
+		cin>>state;
+		if(state==1){
+			//tree test1;
+		    ifstream in;
+		    in.open("test.txt");
+		    ifstream in2;
+		    in2.open("test.txt");
+		    ofstream out;
+		    out.open("output.txt");
+		    compress(in,in2,out);
+		    in.close();
+		    in2.close();
+		    out.close();
+		}
+		else if(state==2){
+			ifstream in;
+		    in.open("key.txt");
+		    decode(in);
+		    in.close();
+		}
+	}
+
     return 0;
 }
 

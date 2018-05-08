@@ -31,7 +31,7 @@ void list123::display()              // store data to key.txt;
 	while(nodePtr)
 	{
 		key<<nodePtr->data;
-		cout<<nodePtr->data;
+//		cout<<nodePtr->data;
 		nodePtr = nodePtr->next;
 	}
 	key.close();

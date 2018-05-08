@@ -35,21 +35,7 @@ void tree::build(stack *list){
 }
 
 
-/*void key(tnode *node, list writer)
-{
-	if (node->left == NULL && node->right ==NULL)
-    {
-        writer.writeBit('1');
-        writer.writeBit(node->character);
-    }
-    else
-    {
-        writer.writeBit('0');
-        key(node->left, writer);
-        key(node->right, writer);
-    }
-}
-*/
+
 void tree::printde()
 {
 	ofstream origin;
@@ -66,7 +52,7 @@ void tree::printde()
 	istringstream s(line);
 	s>>bin; 
 	}
-	//cout<<bin;
+
 	tnode *node = root;             // set initial travel node pointer is root.
 	
  	for(int i =0; i<= bin.size();i++)
@@ -85,10 +71,8 @@ void tree::printde()
 	 	cout<<node->character;         // print orginal file.
 	 	origin << node->character;
 	 	node = root;
-	 
 	}
 	in3.close();
-	
  }
  origin.close();
 }
@@ -97,12 +81,9 @@ void tree::printde()
 void tree::visit(tnode *node, list123 *key){                  // store data to a simple linked list
 
     if(node->left==NULL&&node->right==NULL){
-        //cout<<node->character<<" ";//" "<<node->frequency<<" ";
-        //node->output(cout);
-        //cout<<endl;
+
         key->writeBit('1');                       
         key->writeBit(node->character);
-        //key.display();
 
     }
     else{
@@ -110,30 +91,23 @@ void tree::visit(tnode *node, list123 *key){                  // store data to a
         visit(node->left, key);
         visit(node->right , key);
     }
-    //key.display();
 }
 void tree::visit1(tnode *node)
-{ //list123 key){                  // store data to a simple linked list
-
+{
     if(node->left==NULL&&node->right==NULL){
-        cout<<node->character<<" ";//" "<<node->frequency<<" ";
+        cout<<node->character<<" "<<node->frequency<<" ";
         node->output(cout);
         cout<<endl;
-        //key.writeBit('1');                       
-        //key.writeBit(node->character);
-
     }
     else{
-    	//key.writeBit('0');
         visit1(node->left);
         visit1(node->right);
     }
-    //key.display();
 }
-void tree::print(){
 
-	//cout<<root->character<<" "<<root->frequency<<" ";
-	//root->output(cout);
+
+void tree::print(){
+	cout<<"Character List:"<<endl;
 	visit1(root);
 	
 }
@@ -144,6 +118,7 @@ void tree::set()
 	list123 *x = &w;
     visit(root,x);
     w.display();
+    cout<<endl;
     
 }
 
