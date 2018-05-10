@@ -21,13 +21,18 @@ void compress(istream &in,istream &in2,ostream &out){
     data.build(list);
     data.print();
     
+    cout<<endl<<"encoded:"<<endl;
     char alpha;
     tnode* temp;
     while(in2.get(alpha)){
         temp=data.find_char(alpha);
-        if(temp) temp->output(out);
+        if(temp){
+        	temp->output(out);
+        	temp->output(cout);
+        }
         else cout<<"error"<<endl;
     }
+    cout<<endl;
     data.set();
 }
 
@@ -84,7 +89,7 @@ void decode(ifstream &key)
 	key.get(x);
 	recur(key, deco.root);
 	deco.print();
-	cout<<endl<<"Text result:"<<endl;
+	cout<<endl<<"Decoded:"<<endl;
 	deco.printde();
 	cout<<endl;
 }
@@ -99,11 +104,11 @@ int main(){
 		if(state==1){
 			//tree test1;
 		    ifstream in;
-		    in.open("test.txt");
+		    in.open("input.txt");
 		    ifstream in2;
-		    in2.open("test.txt");
+		    in2.open("input.txt");
 		    ofstream out;
-		    out.open("output.txt");
+		    out.open("encoded.txt");
 		    compress(in,in2,out);
 		    in.close();
 		    in2.close();

@@ -28,12 +28,14 @@ void list123::display()              // store data to key.txt;
 	key.open("key.txt");
 	node1 *nodePtr;
 	nodePtr = head;
+	cout<<endl<<"Key:"<<endl;
 	while(nodePtr)
 	{
 		key<<nodePtr->data;
-//		cout<<nodePtr->data;
+		cout<<nodePtr->data;
 		nodePtr = nodePtr->next;
 	}
+	cout<<endl;
 	key.close();
 }
 

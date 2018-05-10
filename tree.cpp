@@ -40,8 +40,8 @@ void tree::printde()
 {
 	ofstream origin;
 	ifstream in3;
-	origin.open("string.txt");
-    in3.open("output.txt");
+	origin.open("decoded.txt");
+    in3.open("encoded.txt");
     if(in3.is_open()&&origin.is_open())
 	{
 	    string line;
@@ -118,8 +118,8 @@ void tree::set()
 	list123 *x = &w;
     visit(root,x);
     w.display();
-    cout<<endl;
     
+
 }
 
 tnode* tree::find_char(char alpha){
